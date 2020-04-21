@@ -1,0 +1,74 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+<link rel="stylesheet" href="style.css">
+<head></head>
+<body></body>
+
+<h1>TF2 Casual/Competitive Spam Script generator</h1>
+<h2>By Fakeman</h2>
+
+<div id="box">
+	<div>Alias name</div><div><input type="text" id="aliasname"></div>
+	<br>
+	Delay<input type="text" id="delay" value=66>
+	<br><input type="button" value="Add Line" id="addInputs" /><br>
+	<div id="wrap"></div>
+	<input type="button" value="Generate" id="Generate" />
+	</input>
+	<br><br>
+	<h3>Alias output:</h3>
+	<div id="output"></div>
+	<h3>To disable:</h3>
+	<div id="disableoutput"></div>
+</div>
+<script>
+ $("#delay").on("keypress keyup blur",function (event) {    
+           $(this).val($(this).val().replace(/[^\d].+/, ""));
+            if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
+var i = 1;
+$("#addInputs").click(function () {
+    if (i<10) {
+        var $d = $("<div />", {
+            id: "d" + i,
+            class: 'container'
+        });
+        
+            var $i = $("<input />", {
+                type: "text",
+                id: "i" + i,
+				maxlength: "6",
+                placeholder: "Spam Line " + i
+            });
+            $d.append($i);
+        
+        $('#wrap').append($d);
+        i++;
+    }
+});
+$("#Generate").click(function () {
+if(i>1){
+var c=1;
+var aliasname = ($('#aliasname').val() == "") ? "spammer" : $('#aliasname').val();
+var command = "alias " + aliasname + " \"";
+var delay = ($('#delay').val() == 0) ? 66:$('#delay').val();
+$('#disableoutput').text("alias "+"disable"+aliasname + " \"alias "+ aliasname+ " ' ' \"");
+do{
+	c = c +1;
+	var text = $('#i'+(c-1)).val();
+	if(c == i){
+		command += "tournament_teamname " + text + "; wait " + delay + ";"+ aliasname+"\"";
+	}else{
+		command += "tournament_teamname " +text + "; wait " + delay +";";
+	}
+}while(c<i);
+$('#output').text(command);
+}
+});
+
+
+</script>
+</div>
+</html>
