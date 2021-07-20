@@ -1,4 +1,4 @@
-# TF2-Chat-spammer
+# TF2-Chat-spammer (legacy, bug sent to valve and fixed)
 TF2 Casual and competitive spammer
 
 HTML and javascript page to create casual mode chat spam up to 6 characters long
